@@ -4,8 +4,9 @@ using UnityEngine.EventSystems;
 public class Node : MonoBehaviour
 {
     public Color hoverColor;
+    public Color notEnoughMoneyColor;
     public Vector3 positionOffset;
-    
+
     [Header("Optional")]
     public GameObject turret;
     private Color startColor;
@@ -58,7 +59,11 @@ public class Node : MonoBehaviour
 
     private void setMaterialHover()
     {
-        rend.material.color = hoverColor;
+        if (buildManager.HasMoney) {
+            rend.material.color = hoverColor;
+        } else {
+            rend.material.color = notEnoughMoneyColor;
+        }
         rend.material.SetFloat("_Glossiness", 0f);
     }
 
