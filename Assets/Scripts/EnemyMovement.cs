@@ -24,10 +24,16 @@ public class EnemyMovement : MonoBehaviour
     private void GetNextWaypoint()
     {
         if (waypointIndex >= Waypoints.waypoints.Length - 1) {
-            Destroy(gameObject);
+            EndPath();
             return;
         }
 
         target = Waypoints.waypoints[++waypointIndex];
+    }
+
+    private void EndPath()
+    {
+        PlayerStats.ReduceLives();
+        Destroy(gameObject);
     }
 }
