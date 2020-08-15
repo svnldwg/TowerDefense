@@ -17,6 +17,11 @@ public class Turret : MonoBehaviour
     [Header("Use Laser")]
     public bool useLaser = false;
     public LineRenderer lineRenderer;
+    public ParticleSystem laserImpactEffect;
+    public Light impactLight;
+    public int initialLaserDamagePerSecond = 20;
+    public int laserDamageIncreasePercentPerSecond = 50;
+    private int currentLaserDamagePerSecond;
     
     [Header("Unity Setup Fields")]
     public string enemyTag = "Enemy";
@@ -28,7 +33,11 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentLaserDamagePerSecond = initialLaserDamagePerSecond;
+
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+
+        InvokeRepeating("LaserDamage", 0f, 0.5f);
     }
 
     void UpdateTarget()
@@ -61,6 +70,8 @@ public class Turret : MonoBehaviour
         if (target == null) {
             if (useLaser && lineRenderer.enabled) {
                 lineRenderer.enabled = false;
+                laserImpactEffect.Stop();
+                impactLight.enabled = false;
             }
             return;
         }
@@ -81,10 +92,33 @@ public class Turret : MonoBehaviour
     {
         if (!lineRenderer.enabled) {
             lineRenderer.enabled = true;
+            laserImpactEffect.Play();
+            impactLight.enabled = true;
         }
 
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, target.position);
+
+        Vector3 dirFromTargetToTurret = firePoint.position - target.position;
+        laserImpactEffect.transform.position = target.position + dirFromTargetToTurret.normalized * (target.transform.localScale.y / 2);
+        laserImpactEffect.transform.rotation = Quaternion.LookRotation(dirFromTargetToTurret);
+    }
+
+    private void LaserDamage()
+    {
+        if (!useLaser || target == null || !lineRenderer.enabled) {
+            currentLaserDamagePerSecond = initialLaserDamagePerSecond;
+
+            return;
+        }
+
+        EnemyHealth eh = target.GetComponent<EnemyHealth>();
+        if (eh != null) {
+            Debug.Log("Causing Damage of " + (currentLaserDamagePerSecond / 2f));
+            eh.TakeDamage(Mathf.FloorToInt(currentLaserDamagePerSecond / 2f));
+            float laserDamageIncreaseFactor = 1 + laserDamageIncreasePercentPerSecond / 2f / 100f;
+            currentLaserDamagePerSecond = Mathf.FloorToInt(currentLaserDamagePerSecond * laserDamageIncreaseFactor);
+        }
     }
 
     private void LockOnTarget()
