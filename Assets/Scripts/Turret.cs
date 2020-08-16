@@ -6,6 +6,8 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     private Transform target;
+    private Enemy targetEnemy;
+
     [Header("General")]
     public float range = 15f;
 
@@ -16,12 +18,11 @@ public class Turret : MonoBehaviour
 
     [Header("Use Laser")]
     public bool useLaser = false;
+    public int laserDamagePerSecond = 30;
+    public float slowAmount = .5f; // between 0 and 1. 0 meaning no slowing, 1 meaning stopped movement
     public LineRenderer lineRenderer;
     public ParticleSystem laserImpactEffect;
     public Light impactLight;
-    public int initialLaserDamagePerSecond = 20;
-    public int laserDamageIncreasePercentPerSecond = 50;
-    private int currentLaserDamagePerSecond;
     
     [Header("Unity Setup Fields")]
     public string enemyTag = "Enemy";
@@ -33,11 +34,7 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentLaserDamagePerSecond = initialLaserDamagePerSecond;
-
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
-
-        InvokeRepeating("LaserDamage", 0f, 0.5f);
     }
 
     void UpdateTarget()
@@ -57,6 +54,7 @@ public class Turret : MonoBehaviour
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
+            targetEnemy = nearestEnemy.GetComponent<Enemy>();
         } else {
             target = null;
         }
@@ -90,6 +88,9 @@ public class Turret : MonoBehaviour
 
     private void Laser()
     {
+        targetEnemy.TakeDamage(laserDamagePerSecond * Time.deltaTime);
+        targetEnemy.Slow(slowAmount);
+
         if (!lineRenderer.enabled) {
             lineRenderer.enabled = true;
             laserImpactEffect.Play();
@@ -102,23 +103,6 @@ public class Turret : MonoBehaviour
         Vector3 dirFromTargetToTurret = firePoint.position - target.position;
         laserImpactEffect.transform.position = target.position + dirFromTargetToTurret.normalized * (target.transform.localScale.y / 2);
         laserImpactEffect.transform.rotation = Quaternion.LookRotation(dirFromTargetToTurret);
-    }
-
-    private void LaserDamage()
-    {
-        if (!useLaser || target == null || !lineRenderer.enabled) {
-            currentLaserDamagePerSecond = initialLaserDamagePerSecond;
-
-            return;
-        }
-
-        EnemyHealth eh = target.GetComponent<EnemyHealth>();
-        if (eh != null) {
-            Debug.Log("Causing Damage of " + (currentLaserDamagePerSecond / 2f));
-            eh.TakeDamage(Mathf.FloorToInt(currentLaserDamagePerSecond / 2f));
-            float laserDamageIncreaseFactor = 1 + laserDamageIncreasePercentPerSecond / 2f / 100f;
-            currentLaserDamagePerSecond = Mathf.FloorToInt(currentLaserDamagePerSecond * laserDamageIncreaseFactor);
-        }
     }
 
     private void LockOnTarget()

@@ -1,14 +1,21 @@
 ﻿using System;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    public int health = 100;
+    public float initialSpeed = 10f;
+    [HideInInspector]
+    public float speed;
+    public float health = 100f;
     public int moneyGain = 50;
 
     public GameObject deathEffect;
 
-    public void TakeDamage(int amount)
+    private void Start() {
+        speed = initialSpeed;
+    }
+
+    public void TakeDamage(float amount)
     {
         health -= amount;
         if (health <= 0) {
@@ -24,5 +31,10 @@ public class EnemyHealth : MonoBehaviour
         Destroy(effect, 5f);
 
         Destroy(gameObject);
+    }
+
+    public void Slow(float slowAmount)
+    {
+        speed = initialSpeed * (1f - slowAmount);
     }
 }

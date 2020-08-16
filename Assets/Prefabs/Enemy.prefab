@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3333184136369640271}
   - component: {fileID: 2884799594386933113}
   - component: {fileID: 9202231057321479478}
-  - component: {fileID: 8953841438697878500}
   - component: {fileID: -9217185683364709224}
+  - component: {fileID: 8953841438697878500}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -95,6 +95,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-9217185683364709224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786262218959090908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f07386bd3544c0c847507ff84fdfc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  health: 100
+  moneyGain: 50
+  deathEffect: {fileID: 7991296769517722413, guid: 43ca154927d2d404d989b4235123ba95,
+    type: 3}
 --- !u!114 &8953841438697878500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,20 +124,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d5f024acd8d41978d8fedda5eb6a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
---- !u!114 &-9217185683364709224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4786262218959090908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f9c992165bd54b8a94770e99bcc4562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  moneyGain: 50
-  deathEffect: {fileID: 7991296769517722413, guid: 43ca154927d2d404d989b4235123ba95,
-    type: 3}

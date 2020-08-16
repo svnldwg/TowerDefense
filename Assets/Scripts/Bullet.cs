@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public GameObject impactEffect;
 
     public float speed = 70f;
-    public int damage = 50;
+    public float damage = 50f;
     public float explosionRadius = 0f;
 
     public void Seek(Transform _target)
@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
 
     private void Damage(Transform enemy)
     {
-        EnemyHealth eh = enemy.GetComponent<EnemyHealth>();
+        Enemy eh = enemy.GetComponent<Enemy>();
         if (eh != null) {
             eh.TakeDamage(damage);
         }
