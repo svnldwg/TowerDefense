@@ -7,16 +7,16 @@ public class PlayerStats : MonoBehaviour
     public int initialMoney = 400;
     public int initialLives = 20;
 
-    public static void ReduceLives()
-    {
-        lives--;
-        if (lives <= 0) {
-            GameManager.EndGame();
-        }
-    }
+    public static int waves;
 
     private void Start() {
         money = initialMoney;
         lives = initialLives;
+        waves = 0;
+    }
+
+    public static void ReduceLives()
+    {
+        lives--;
     }
 }

@@ -10,6 +10,11 @@ public class CameraController : MonoBehaviour
 
     private void Update() 
     {
+        if (GameManager.gameIsOver) {
+            this.enabled = false;
+            return;
+        }
+
         if (Input.mousePosition.x <= 0 
             || Input.mousePosition.y <= 0
             || Input.mousePosition.x >= Screen.width
