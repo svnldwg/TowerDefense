@@ -8,11 +8,31 @@ public class CameraController : MonoBehaviour
     public float minY = 10f;
     public float maxY = 80f;
 
+    Vector3 touchStart;
+
     private void Update() 
     {
         if (GameManager.gameIsOver) {
             this.enabled = false;
             return;
+        }
+
+        if (Input.touchCount == 1) {
+            Touch currentTouch = Input.GetTouch(0);
+
+            if (currentTouch.phase == TouchPhase.Began) {
+                touchStart = currentTouch.position;
+            }
+
+            if (currentTouch.phase == TouchPhase.Moved || currentTouch.phase == TouchPhase.Stationary) {
+                Vector3 touchPosition = currentTouch.position;
+                touchPosition.z = touchStart.z = transform.position.y;
+                Vector3 direction = Camera.main.ScreenToWorldPoint(touchStart) - Camera.main.ScreenToWorldPoint(touchPosition);
+                Debug.Log("Direction: " + direction.ToString());
+                Debug.Log("Direction normalized: " + direction.normalized.ToString());
+
+                transform.Translate(direction.normalized * Time.deltaTime * panSpeed, Space.World);
+            }
         }
 
         if (Input.mousePosition.x <= 0 
