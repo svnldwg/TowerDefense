@@ -3,3 +3,7 @@
 - Game speed switch
 - Touch controls for mobile devices
 - Turret with Slow Down Radius (ice tower)
+- Camera Clamping to prevent going off bounds
+- Portals
+- More Levels
+- Spawn next wave instantly
