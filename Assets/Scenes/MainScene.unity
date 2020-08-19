@@ -10401,8 +10401,10 @@ MonoBehaviour:
   panSpeedTouch: 90
   panBorderThickness: 15
   scrollSpeed: 2
-  minY: 20
-  maxY: 80
+  zoomSpeedTouch: 8
+  panOffsetBounds: 50
+  minY: 10
+  maxY: 100
   cam: {fileID: 963194227}
 --- !u!1001 &968397232
 PrefabInstance:
@@ -10779,7 +10781,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980192105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
