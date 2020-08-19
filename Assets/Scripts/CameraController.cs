@@ -7,13 +7,24 @@ public class CameraController : MonoBehaviour
     public float panBorderThickness = 15f;
     public float scrollSpeed = 5f;
     public float zoomSpeedTouch = 8f;
+    public float panOffsetBounds = 50f;
     public float minY = 10f;
-    public float maxY = 80f;
+    public float maxY = 100f;
+    private Vector3 min;
+    private Vector3 max;
 
     public Camera cam;
     Vector3 touchStart;
     private bool touchPanActive = false;
     private float lastTouchZoomDistance = 0f;
+
+    private void Start() 
+    {
+        min = transform.position - new Vector3(panOffsetBounds, panOffsetBounds, panOffsetBounds);
+        min.y = minY;
+        max = transform.position + new Vector3(panOffsetBounds, panOffsetBounds, panOffsetBounds);
+        max.y = maxY;
+    }
 
     private void Update() 
     {
@@ -39,19 +50,19 @@ public class CameraController : MonoBehaviour
         }
 
         if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness) {
-            transform.Translate(Vector3.forward * panSpeed * Time.deltaTime, Space.World);
+            AddToCameraPosition(Vector3.forward * panSpeed * Time.deltaTime);
         }
 
         if (Input.GetKey("s") || Input.mousePosition.y <= panBorderThickness) {
-            transform.Translate(Vector3.back * panSpeed * Time.deltaTime, Space.World);
+            AddToCameraPosition(Vector3.back * panSpeed * Time.deltaTime);
         }
 
         if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThickness) {
-            transform.Translate(Vector3.left * panSpeed * Time.deltaTime, Space.World);
+            AddToCameraPosition(Vector3.left * panSpeed * Time.deltaTime);
         }
 
         if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panBorderThickness) {
-            transform.Translate(Vector3.right * panSpeed * Time.deltaTime, Space.World);
+            AddToCameraPosition(Vector3.right * panSpeed * Time.deltaTime);
         }
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -116,8 +127,10 @@ public class CameraController : MonoBehaviour
     {
         Vector3 cameraPos = transform.position;
         cameraPos += pos;
-        cameraPos.y = Mathf.Clamp(cameraPos.y, minY, maxY);
-        // TODO: clamp X and Z axis
+        cameraPos.y = Mathf.Clamp(cameraPos.y, min.y, max.y);
+        cameraPos.x = Mathf.Clamp(cameraPos.x, min.x, max.x);
+        cameraPos.z = Mathf.Clamp(cameraPos.z, min.z, max.z);
+
         transform.position = cameraPos;
     }
 }
