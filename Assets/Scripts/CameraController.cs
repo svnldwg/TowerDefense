@@ -6,12 +6,14 @@ public class CameraController : MonoBehaviour
     public float panSpeedTouch = 40f;
     public float panBorderThickness = 15f;
     public float scrollSpeed = 5f;
+    public float zoomSpeedTouch = 8f;
     public float minY = 10f;
     public float maxY = 80f;
 
     public Camera cam;
     Vector3 touchStart;
     private bool touchPanActive = false;
+    private float lastTouchZoomDistance = 0f;
 
     private void Update() 
     {
@@ -54,16 +56,14 @@ public class CameraController : MonoBehaviour
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0) {
-            Vector3 pos = transform.position;
-            pos.y -= scroll * 1000 * scrollSpeed * Time.deltaTime;
-            pos.y = Mathf.Clamp(pos.y, minY, maxY);
-            transform.position = pos;
+            AddToCameraPosition(new Vector3(0, scroll * 1000 * scrollSpeed * Time.deltaTime * -1, 0));
         }
     }
 
     private void TouchControl()
     {
         PanByTouch();
+        ZoomByTouch();
     }
     private void PanByTouch()
     {
@@ -83,11 +83,41 @@ public class CameraController : MonoBehaviour
             Vector3 touchPosition = touch.position;
             touchPosition.z = touchStart.z = transform.position.y;
             Vector3 direction = cam.ScreenToWorldPoint(touchStart) - cam.ScreenToWorldPoint(touchPosition);
-
-            transform.Translate(direction * Time.deltaTime * panSpeedTouch, Space.World);
-            //transform.position += direction * Time.deltaTime * panSpeedTouch;
+            
+            Vector3 pos = direction * Time.deltaTime * panSpeedTouch;
+            AddToCameraPosition(pos);
 
             touchStart = touch.position;
         }
+    }
+
+    private void ZoomByTouch()
+    {
+        if (Input.touchCount != 2) {
+            lastTouchZoomDistance = 0f;
+            return;
+        }
+
+        Vector2 touch0, touch1;
+        float distance;
+        touch0 = Input.GetTouch(0).position;
+        touch1 = Input.GetTouch(1).position;
+        distance = Vector2.Distance(touch0, touch1);
+
+        if (lastTouchZoomDistance > 0f) {
+            float diff = distance - lastTouchZoomDistance;
+            AddToCameraPosition(new Vector3(0, diff * zoomSpeedTouch * Time.deltaTime * -1, 0));
+        }
+
+        lastTouchZoomDistance = distance;
+    }
+
+    private void AddToCameraPosition(Vector3 pos)
+    {
+        Vector3 cameraPos = transform.position;
+        cameraPos += pos;
+        cameraPos.y = Mathf.Clamp(cameraPos.y, minY, maxY);
+        // TODO: clamp X and Z axis
+        transform.position = cameraPos;
     }
 }
