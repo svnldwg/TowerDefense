@@ -10398,10 +10398,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panSpeed: 30
+  panSpeedTouch: 90
   panBorderThickness: 15
   scrollSpeed: 2
   minY: 20
   maxY: 80
+  cam: {fileID: 963194227}
 --- !u!1001 &968397232
 PrefabInstance:
   m_ObjectHideFlags: 0

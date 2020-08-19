@@ -3,11 +3,13 @@
 public class CameraController : MonoBehaviour
 {
     public float panSpeed = 30f;
+    public float panSpeedTouch = 90f;
     public float panBorderThickness = 15f;
     public float scrollSpeed = 5f;
     public float minY = 10f;
     public float maxY = 80f;
 
+    public Camera cam;
     Vector3 touchStart;
 
     private void Update() 
@@ -24,14 +26,14 @@ public class CameraController : MonoBehaviour
                 touchStart = currentTouch.position;
             }
 
-            if (currentTouch.phase == TouchPhase.Moved || currentTouch.phase == TouchPhase.Stationary) {
+            if (currentTouch.phase == TouchPhase.Moved) {
                 Vector3 touchPosition = currentTouch.position;
                 touchPosition.z = touchStart.z = transform.position.y;
-                Vector3 direction = Camera.main.ScreenToWorldPoint(touchStart) - Camera.main.ScreenToWorldPoint(touchPosition);
+                Vector3 direction = cam.ScreenToWorldPoint(touchStart) - cam.ScreenToWorldPoint(touchPosition);
                 Debug.Log("Direction: " + direction.ToString());
                 Debug.Log("Direction normalized: " + direction.normalized.ToString());
 
-                transform.Translate(direction.normalized * Time.deltaTime * panSpeed, Space.World);
+                transform.Translate(direction.normalized * Time.deltaTime * panSpeedTouch, Space.World);
             }
         }
 
