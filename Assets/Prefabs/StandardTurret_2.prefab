@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 8496599562623754026}
   - component: {fileID: -7195561480904031958}
   m_Layer: 0
-  m_Name: StandardTurret_1
+  m_Name: StandardTurret_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,7 @@ Transform:
   m_GameObject: {fileID: 9124905159520798096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 5438130736187420568}
   - {fileID: 5757046726238467573}
@@ -187,10 +187,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6051a787a78d746fa8b8897ecd797f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 17
-  bulletPrefab: {fileID: 832073614410587844, guid: 8c94909df1a0f475d98b9313a5fa7023,
+  range: 19
+  bulletPrefab: {fileID: 832073614410587844, guid: 3ad3df34849174452ac4c3ef38b48641,
     type: 3}
-  fireRate: 1.3
+  fireRate: 1.7
   useLaser: 0
   laserDamagePerSecond: 30
   slowAmount: 0.5

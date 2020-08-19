@@ -4298,21 +4298,35 @@ MonoBehaviour:
     prefab: {fileID: 9124905159520798096, guid: bbbeb568a1d53418e8184495a930d5d4,
       type: 3}
     cost: 100
-    upgradeCost: 60
-    upgradedPrefab: {fileID: 9124905159520798096, guid: b215d8194a0da45a1b068ed30c9643d5,
+    upgradeCost1: 60
+    upgradedPrefab1: {fileID: 9124905159520798096, guid: b215d8194a0da45a1b068ed30c9643d5,
+      type: 3}
+    upgradeCost2: 100
+    upgradedPrefab2: {fileID: 9124905159520798096, guid: e4d3a1a2b96794c03b092a2665ea5784,
+      type: 3}
+    upgradeCost3: 150
+    upgradedPrefab3: {fileID: 9124905159520798096, guid: 840644bb32e68413d8bb9bd453589123,
       type: 3}
   missileLauncher:
     prefab: {fileID: 8845914856531656133, guid: a3209e3c2885c41b9b4d06396784a509,
       type: 3}
     cost: 250
-    upgradeCost: 150
-    upgradedPrefab: {fileID: 0}
+    upgradeCost1: 0
+    upgradedPrefab1: {fileID: 0}
+    upgradeCost2: 0
+    upgradedPrefab2: {fileID: 0}
+    upgradeCost3: 0
+    upgradedPrefab3: {fileID: 0}
   laserBeamer:
     prefab: {fileID: 1998375150720670617, guid: 39355b54f16ce4ab0963e544e63364f2,
       type: 3}
     cost: 350
-    upgradeCost: 200
-    upgradedPrefab: {fileID: 0}
+    upgradeCost1: 0
+    upgradedPrefab1: {fileID: 0}
+    upgradeCost2: 0
+    upgradedPrefab2: {fileID: 0}
+    upgradeCost3: 0
+    upgradedPrefab3: {fileID: 0}
 --- !u!1001 &320766726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12782,7 +12796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 1922829609}
-  upgradeCost: {fileID: 2096308538}
+  upgradeCostText: {fileID: 2096308538}
   upgradeButton: {fileID: 1410146657}
 --- !u!1 &1154396355
 GameObject:

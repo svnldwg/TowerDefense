@@ -7,3 +7,6 @@
 - More Levels
 - Spawn next wave instantly
 - display range when clicking on turret
+
+Upgrade system:
+- upgrades for missile launcher and laser beamer

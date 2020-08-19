@@ -86,16 +86,17 @@ public class Node : MonoBehaviour
 
     public void UpgradeTurret()
     {
-        if (PlayerStats.money < turretBlueprint.upgradeCost) {
+        int upgradeCost = GetUpgradeCost();
+        if (PlayerStats.money < upgradeCost) {
             Debug.Log("Not enough money to upgrade!");
             return;
         }
 
-        PlayerStats.money -= turretBlueprint.upgradeCost;
+        PlayerStats.money -= upgradeCost;
 
         Destroy(turret);
 
-        GameObject upgradedTurret = (GameObject)Instantiate(turretBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
+        GameObject upgradedTurret = (GameObject)Instantiate(turretBlueprint.GetUpgradePrefab(turretUpgradeLevel + 1), GetBuildPosition(), Quaternion.identity);
         turret = upgradedTurret;
 
         GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
@@ -103,6 +104,16 @@ public class Node : MonoBehaviour
 
         turretUpgradeLevel += 1;
         Debug.Log("Turret upgraded to level " + turretUpgradeLevel);
+    }
+
+    public int GetUpgradeCost()
+    {
+        return turretBlueprint.GetUpgradeCost(turretUpgradeLevel + 1);
+    }
+
+    public bool TurretIsUpgradable()
+    {
+        return turretUpgradeLevel < 3;
     }
 
     private void setMaterialHover()
