@@ -3,7 +3,7 @@
 public class CameraController : MonoBehaviour
 {
     public float panSpeed = 30f;
-    public float panSpeedTouch = 90f;
+    public float panSpeedTouch = 40f;
     public float panBorderThickness = 15f;
     public float scrollSpeed = 5f;
     public float minY = 10f;
@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
 
     public Camera cam;
     Vector3 touchStart;
+    private bool touchPanActive = false;
 
     private void Update() 
     {
@@ -19,24 +20,15 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        if (Input.touchCount == 1) {
-            Touch currentTouch = Input.GetTouch(0);
+        #if UNITY_IOS || UNITY_ANDROID 
+            TouchControl();
+        #endif
 
-            if (currentTouch.phase == TouchPhase.Began) {
-                touchStart = currentTouch.position;
-            }
+        KeyboardMouseControl(); // TODO: do not compile this for mobile
+    }
 
-            if (currentTouch.phase == TouchPhase.Moved) {
-                Vector3 touchPosition = currentTouch.position;
-                touchPosition.z = touchStart.z = transform.position.y;
-                Vector3 direction = cam.ScreenToWorldPoint(touchStart) - cam.ScreenToWorldPoint(touchPosition);
-                Debug.Log("Direction: " + direction.ToString());
-                Debug.Log("Direction normalized: " + direction.normalized.ToString());
-
-                transform.Translate(direction.normalized * Time.deltaTime * panSpeedTouch, Space.World);
-            }
-        }
-
+    private void KeyboardMouseControl()
+    {
         if (Input.mousePosition.x <= 0 
             || Input.mousePosition.y <= 0
             || Input.mousePosition.x >= Screen.width
@@ -67,5 +59,35 @@ public class CameraController : MonoBehaviour
             pos.y = Mathf.Clamp(pos.y, minY, maxY);
             transform.position = pos;
         }
-    } 
+    }
+
+    private void TouchControl()
+    {
+        PanByTouch();
+    }
+    private void PanByTouch()
+    {
+        if (Input.touchCount != 1) {
+            touchPanActive = false;
+            return;
+        }
+
+        Touch touch = Input.GetTouch(0);
+
+        if (touch.phase == TouchPhase.Began) {
+            touchStart = touch.position;
+            touchPanActive = true;
+        }
+
+        if (touchPanActive && touch.phase == TouchPhase.Moved) {
+            Vector3 touchPosition = touch.position;
+            touchPosition.z = touchStart.z = transform.position.y;
+            Vector3 direction = cam.ScreenToWorldPoint(touchStart) - cam.ScreenToWorldPoint(touchPosition);
+
+            transform.Translate(direction * Time.deltaTime * panSpeedTouch, Space.World);
+            //transform.position += direction * Time.deltaTime * panSpeedTouch;
+
+            touchStart = touch.position;
+        }
+    }
 }
