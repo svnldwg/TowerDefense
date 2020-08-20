@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class UpgradeLevel
+public struct UpgradeLevel
 {
     public int costs;
     public GameObject prefab;

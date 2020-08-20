@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 public class Node : MonoBehaviour
 {
     public Color hoverColor;
-    public Color notEnoughMoneyColor;
     public Vector3 positionOffset;
 
     [HideInInspector]
@@ -35,41 +34,21 @@ public class Node : MonoBehaviour
         return transform.position + positionOffset;
     }
 
-    #if !UNITY_IOS && !UNITY_ANDROID 
-    private void OnMouseEnter() {
-        if (EventSystemTouch.IsPointerOverGameObject()) {
-            return; 
-        }
-        if (!buildManager.CanBuild) {
-            return;
-        }
-        setMaterialHover();
-    }
-
-    private void OnMouseExit() {
-        resetMaterial();
-    }
-    #endif
-
     private void OnMouseUpAsButton() {
         if (EventSystemTouch.IsPointerOverGameObject()) {
             return; 
-        } 
-
-        if (turret != null) {
-            buildManager.SelectNode(this);
-            return;
         }
 
-        if (!buildManager.CanBuild) {
-            return;
-        }
-
-        BuildTurret(buildManager.GetTurretToBuild());
+        buildManager.SelectNode(this);
     }
 
-    private void BuildTurret(TurretBlueprint blueprint)
+    public void BuildTurret(TurretBlueprint blueprint)
     {
+        if (turret != null) {
+            Debug.Log("Can't build here, turret already exists");
+            return;
+        }
+
         if (PlayerStats.money < blueprint.cost) {
             Debug.Log("Not enough money to build that!");
             return;
@@ -118,17 +97,13 @@ public class Node : MonoBehaviour
         return turretUpgradeLevel < 3;
     }
 
-    private void setMaterialHover()
+    public void SetMaterialHover()
     {
-        if (buildManager.HasMoney) {
-            rend.material.color = hoverColor;
-        } else {
-            rend.material.color = notEnoughMoneyColor;
-        }
+        rend.material.color = hoverColor;
         rend.material.SetFloat("_Glossiness", 0f);
     }
 
-    private void resetMaterial()
+    public void ResetMaterial()
     {
         rend.material.color = startColor;
         rend.material.SetFloat("Glossiness", startGlossiness);

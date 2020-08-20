@@ -4,43 +4,23 @@ using UnityEngine.UI;
 public class NodeUI : MonoBehaviour
 {
     public GameObject ui;
-    
-    public Text upgradeCostText;
-    
-    public Button upgradeButton;
+    public GameObject shopUi;
+    public Shop shop;
+    public Button standardTurretButton;
+    public Button missileLauncherButton;
+    public Button laserBeamerButton;
 
     private Node target;
 
-    private int upgradeCost;
-
     private void Start() {
-        InvokeRepeating("UpdateButtonStatus", 0f, 0.5f);
+        InvokeRepeating("UpdateButtonStatus", 0f, 0.2f);
     }
 
     public void SetTarget(Node _target)
     {
         target = _target;
 
-        transform.position = target.GetBuildPosition();
-
-        if (target.TurretIsUpgradable()) {
-            upgradeCost = target.GetUpgradeCost();
-            upgradeCostText.text = "$" + upgradeCost;
-            upgradeButton.interactable = PlayerStats.money >= upgradeCost;
-        } else {
-            upgradeCostText.text = "MAX";
-            upgradeButton.interactable = false;
-        }
-
         ui.SetActive(true);
-    }
-
-    private void UpdateButtonStatus() {
-        if (!ui.activeSelf) {
-            return;
-        }
-
-        upgradeButton.interactable = PlayerStats.money >= upgradeCost;
     }
 
     public void Hide()
@@ -52,5 +32,22 @@ public class NodeUI : MonoBehaviour
     {
         target.UpgradeTurret();
         BuildManager.instance.DeselectNode();
+    }
+
+    private void UpdateButtonStatus() {
+        if (!ui.activeSelf) {
+            return;
+        }
+
+        if (target.turret != null) {
+            shopUi.SetActive(false);
+            return;
+        } else {
+            shopUi.SetActive(true);
+        }
+
+        standardTurretButton.interactable = PlayerStats.money >= shop.standardTurret.cost;
+        missileLauncherButton.interactable = PlayerStats.money >=  shop.missileLauncher.cost;
+        laserBeamerButton.interactable = PlayerStats.money >= shop.laserBeamer.cost;
     }
 }
