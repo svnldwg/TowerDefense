@@ -35,6 +35,7 @@ public class Node : MonoBehaviour
         return transform.position + positionOffset;
     }
 
+    #if !UNITY_IOS && !UNITY_ANDROID 
     private void OnMouseEnter() {
         if (EventSystemTouch.IsPointerOverGameObject()) {
             return; 
@@ -48,9 +49,10 @@ public class Node : MonoBehaviour
     private void OnMouseExit() {
         resetMaterial();
     }
+    #endif
 
     private void OnMouseUpAsButton() {
-        if (EventSystem.current.IsPointerOverGameObject()) {
+        if (EventSystemTouch.IsPointerOverGameObject()) {
             return; 
         } 
 
@@ -96,7 +98,7 @@ public class Node : MonoBehaviour
 
         Destroy(turret);
 
-        GameObject upgradedTurret = (GameObject)Instantiate(turretBlueprint.GetUpgradePrefab(turretUpgradeLevel + 1), GetBuildPosition(), Quaternion.identity);
+        GameObject upgradedTurret = (GameObject)Instantiate(turretBlueprint.upgradeConfig.GetPrefab(turretUpgradeLevel + 1), GetBuildPosition(), Quaternion.identity);
         turret = upgradedTurret;
 
         GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
@@ -108,7 +110,7 @@ public class Node : MonoBehaviour
 
     public int GetUpgradeCost()
     {
-        return turretBlueprint.GetUpgradeCost(turretUpgradeLevel + 1);
+        return turretBlueprint.upgradeConfig.GetCosts(turretUpgradeLevel + 1);
     }
 
     public bool TurretIsUpgradable()
