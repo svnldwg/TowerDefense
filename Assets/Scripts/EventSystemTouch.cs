@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,22 +9,14 @@ public class EventSystemTouch : MonoBehaviour
         // Check mouse
         if (EventSystem.current.IsPointerOverGameObject())
         {
+            Debug.Log("return mouse");
             return true;
         }
 
-        // Check touches
-        for (int i = 0; i < Input.touchCount; i++)
-        {
-            var touch = Input.GetTouch(i);
-            if(touch.phase == TouchPhase.Began)
-            {
-                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-                {
-                    return true;
-                }
-            }
-        }
-        
-        return false;
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Count > 0;
     }
 }
