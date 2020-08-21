@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Node : MonoBehaviour
 {
@@ -12,14 +11,14 @@ public class Node : MonoBehaviour
     [HideInInspector]
     public TurretBlueprint turretBlueprint;
 
-    [HideInInspector]
-    public int turretUpgradeLevel = 0;
+    private int turretUpgradeLevel = 0;
     
 
     private Color startColor;
     private float startGlossiness;
     private Renderer rend;
     private BuildManager buildManager;
+
 
     private void Start() {
         rend = GetComponent<Renderer>();
@@ -85,6 +84,11 @@ public class Node : MonoBehaviour
 
         turretUpgradeLevel += 1;
         Debug.Log("Turret upgraded to level " + turretUpgradeLevel);
+    }
+
+    public int GetUpgradeLevel()
+    {
+        return turretUpgradeLevel;
     }
 
     public int GetUpgradeCost()

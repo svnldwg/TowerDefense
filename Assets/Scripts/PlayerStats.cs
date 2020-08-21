@@ -15,6 +15,11 @@ public class PlayerStats : MonoBehaviour
         waves = 0;
     }
 
+    public static bool CanAfford(int amount)
+    {
+        return money >= amount;
+    }
+
     public static void ReduceLives()
     {
         lives--;
