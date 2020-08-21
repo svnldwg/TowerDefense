@@ -39,18 +39,7 @@ public class NodeUI : MonoBehaviour
         UpdateUpgradeUI();
     }
 
-    public void UpdateUpgradeTexts()
-    {
-        levelText.text = "LVL " + target.GetUpgradeLevel();
-
-        if (target.TurretIsUpgradable()) {
-            upgradeCostText.text = "$" + target.GetUpgradeCost();
-        } else {
-            upgradeCostText.text = "MAX";
-        }
-    }
-
-    public void UpdateUI() {
+    private void UpdateUI() {
         if (!ui.activeSelf) {
             return;
         }
@@ -82,14 +71,17 @@ public class NodeUI : MonoBehaviour
 
         upgradeUi.SetActive(true);
         
-        if (!target.TurretIsUpgradable()) {
+        levelText.text = "LVL " + target.GetUpgradeLevel();
+
+        if (target.TurretIsUpgradable()) {
+            upgradeCostText.text = "$" + target.GetUpgradeCost();
+        } else {
+            upgradeCostText.text = "MAX";
             upgradeButton.interactable = false;
 
             return;
         }
 
         upgradeButton.interactable = PlayerStats.CanAfford(target.GetUpgradeCost());
-
-        UpdateUpgradeTexts();
     }
 }
