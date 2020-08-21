@@ -106,7 +106,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4493444a85a734dc19ddc49d00baf6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0}
-  notEnoughMoneyColor: {r: 1, g: 0, b: 0, a: 1}
+  hoverColor: {r: 0.34242612, g: 0.50251603, b: 0.5377358, a: 0.84313726}
   positionOffset: {x: 0, y: 0.5, z: 0}
   turret: {fileID: 0}
+  turretBlueprint:
+    prefab: {fileID: 0}
+    cost: 0
+    upgradeConfig:
+      level1:
+        costs: 0
+        prefab: {fileID: 0}
+      level2:
+        costs: 0
+        prefab: {fileID: 0}
+      level3:
+        costs: 0
+        prefab: {fileID: 0}
