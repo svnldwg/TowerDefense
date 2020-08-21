@@ -4,20 +4,25 @@ using UnityEngine.UI;
 public class NodeUI : MonoBehaviour
 {
     public GameObject ui;
+
+    [Header("Shop")]
     public GameObject shopUi;
-    public GameObject upgradeUi;
     public Shop shop;
     public Button standardTurretButton;
     public Button missileLauncherButton;
     public Button laserBeamerButton;
+
+    [Header("Upgrade")]
+    public GameObject upgradeUi;
+    public Image turretImage;
     public Button upgradeButton;
     public Text upgradeCostText;
     public Text levelText;
 
     private Node target;
 
-    private void Start() {
-        InvokeRepeating("UpdateUI", 0f, 0.25f);
+    private void Update() {
+        UpdateUI();
     }
 
     public void SetTarget(Node _target)
@@ -30,6 +35,8 @@ public class NodeUI : MonoBehaviour
     public void Hide()
     {
         ui.SetActive(false);
+        shopUi.SetActive(false);
+        upgradeUi.SetActive(false);
     }
 
     public void Upgrade()
@@ -69,7 +76,10 @@ public class NodeUI : MonoBehaviour
             return;
         }
 
-        upgradeUi.SetActive(true);
+        if (upgradeUi.activeSelf == false) {
+            upgradeUi.SetActive(true);
+            turretImage.sprite = target.turretBlueprint.image.sprite;
+        }
         
         levelText.text = "LVL " + target.GetUpgradeLevel();
 
