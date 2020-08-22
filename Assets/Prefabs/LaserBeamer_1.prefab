@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691891440476233040}
   m_LocalRotation: {x: 0, y: -0.70710677, z: 0, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: 1.358, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2661996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8740199689599470007}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 1691891442263353035}
   - component: {fileID: -314859013468539150}
   m_Layer: 0
-  m_Name: LaserBeamer
+  m_Name: LaserBeamer_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 1998375150720670617}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 5307253988369440529}
   - {fileID: 1691891440476233041}
@@ -160,12 +160,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6051a787a78d746fa8b8897ecd797f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 20
+  range: 25
   bulletPrefab: {fileID: 0}
   fireRate: 1
   useLaser: 1
-  laserDamagePerSecond: 25
-  slowAmount: 0.3
+  laserDamagePerSecond: 32
+  slowAmount: 0.5
   lineRenderer: {fileID: -314859013468539150}
   laserImpactEffect: {fileID: 1946244832233260412}
   impactLight: {fileID: 6475550362650670498}
@@ -223,7 +223,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.30952454
+        value: 0.37093097
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -646,8 +646,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1
+      scalar: 2.5
+      minScalar: 1.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5142,7 +5142,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6623793828431506776}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0.4558004, z: 0}
+  m_LocalPosition: {x: -0, y: 0.364, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 63.703358}
   m_Children: []
   m_Father: {fileID: 1220606547061375267}

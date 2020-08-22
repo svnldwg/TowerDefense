@@ -4323,14 +4323,17 @@ MonoBehaviour:
     cost: 250
     upgradeConfig:
       level1:
-        costs: 0
-        prefab: {fileID: 0}
+        costs: 125
+        prefab: {fileID: 8845914856531656133, guid: c99b3993b74da441bb87c8c45b920d62,
+          type: 3}
       level2:
-        costs: 0
-        prefab: {fileID: 0}
+        costs: 250
+        prefab: {fileID: 8845914856531656133, guid: a3b093175507f441a967c544a130b9dd,
+          type: 3}
       level3:
-        costs: 0
-        prefab: {fileID: 0}
+        costs: 375
+        prefab: {fileID: 8845914856531656133, guid: e22a47bf79b214733acb867f3349312d,
+          type: 3}
   laserBeamer:
     prefab: {fileID: 1998375150720670617, guid: 39355b54f16ce4ab0963e544e63364f2,
       type: 3}
@@ -4338,14 +4341,17 @@ MonoBehaviour:
     cost: 350
     upgradeConfig:
       level1:
-        costs: 0
-        prefab: {fileID: 0}
+        costs: 175
+        prefab: {fileID: 1998375150720670617, guid: f49b901fc0e404357a443f7ca0a07139,
+          type: 3}
       level2:
-        costs: 0
-        prefab: {fileID: 0}
+        costs: 350
+        prefab: {fileID: 1998375150720670617, guid: bb18deeb143864024ae2885082537320,
+          type: 3}
       level3:
-        costs: 0
-        prefab: {fileID: 0}
+        costs: 525
+        prefab: {fileID: 1998375150720670617, guid: c3007438c5ed64d58b60bcd4b2eb5415,
+          type: 3}
 --- !u!1001 &320766726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6283,7 +6289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dec794a969244890b1f346857a53243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialMoney: 400
+  initialMoney: 4000
   initialLives: 1
 --- !u!114 &487446695
 MonoBehaviour:
@@ -20676,7 +20682,6 @@ GameObject:
   - component: {fileID: 1781450764}
   - component: {fileID: 1781450767}
   - component: {fileID: 1781450766}
-  - component: {fileID: 1781450765}
   m_Layer: 5
   m_Name: Upgrade
   m_TagString: Untagged
@@ -20708,66 +20713,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000030517578, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1781450765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781450763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c55a7877ee0f8487184d5f1fcafc1a7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  standardTurret:
-    prefab: {fileID: 9124905159520798096, guid: bbbeb568a1d53418e8184495a930d5d4,
-      type: 3}
-    image: {fileID: 1519516051}
-    cost: 100
-    upgradeConfig:
-      level1:
-        costs: 60
-        prefab: {fileID: 9124905159520798096, guid: b215d8194a0da45a1b068ed30c9643d5,
-          type: 3}
-      level2:
-        costs: 100
-        prefab: {fileID: 9124905159520798096, guid: e4d3a1a2b96794c03b092a2665ea5784,
-          type: 3}
-      level3:
-        costs: 150
-        prefab: {fileID: 9124905159520798096, guid: 840644bb32e68413d8bb9bd453589123,
-          type: 3}
-  missileLauncher:
-    prefab: {fileID: 8845914856531656133, guid: a3209e3c2885c41b9b4d06396784a509,
-      type: 3}
-    image: {fileID: 792508637}
-    cost: 250
-    upgradeConfig:
-      level1:
-        costs: 0
-        prefab: {fileID: 0}
-      level2:
-        costs: 0
-        prefab: {fileID: 0}
-      level3:
-        costs: 0
-        prefab: {fileID: 0}
-  laserBeamer:
-    prefab: {fileID: 1998375150720670617, guid: 39355b54f16ce4ab0963e544e63364f2,
-      type: 3}
-    image: {fileID: 1169177081}
-    cost: 350
-    upgradeConfig:
-      level1:
-        costs: 0
-        prefab: {fileID: 0}
-      level2:
-        costs: 0
-        prefab: {fileID: 0}
-      level3:
-        costs: 0
-        prefab: {fileID: 0}
 --- !u!114 &1781450766
 MonoBehaviour:
   m_ObjectHideFlags: 0
