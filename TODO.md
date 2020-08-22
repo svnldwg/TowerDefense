@@ -5,6 +5,9 @@ Game features:
 - display range when clicking on turret
 - sell turrets
 
+Controls:
+- Click outside of node closes shop menu
+
 UI:
 - display turret name in Shop
 - display turret attributes in Shop (radius, damage, speed, etc.)

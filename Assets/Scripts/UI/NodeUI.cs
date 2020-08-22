@@ -17,6 +17,7 @@ public class NodeUI : MonoBehaviour
     public Image turretImage;
     public Button upgradeButton;
     public Text upgradeCostText;
+    public Text priceOfSaleText;
     public Text levelText;
 
     private Node target;
@@ -29,7 +30,6 @@ public class NodeUI : MonoBehaviour
     {
         target = _target;
         ui.SetActive(true);
-        UpdateUI();
     }
 
     public void Hide()
@@ -42,8 +42,12 @@ public class NodeUI : MonoBehaviour
     public void Upgrade()
     {
         target.UpgradeTurret();
+    }
 
-        UpdateUpgradeUI();
+    public void Sell()
+    {
+        Debug.Log("Sell");
+        target.SellTurret();
     }
 
     private void UpdateUI() {
@@ -64,9 +68,9 @@ public class NodeUI : MonoBehaviour
         
         shopUi.SetActive(true);
 
-        standardTurretButton.interactable = PlayerStats.money >= shop.standardTurret.cost;
-        missileLauncherButton.interactable = PlayerStats.money >=  shop.missileLauncher.cost;
-        laserBeamerButton.interactable = PlayerStats.money >= shop.laserBeamer.cost;
+        standardTurretButton.interactable = PlayerStats.CanAfford(shop.standardTurret.cost);
+        missileLauncherButton.interactable = PlayerStats.CanAfford(shop.missileLauncher.cost);
+        laserBeamerButton.interactable = PlayerStats.CanAfford(shop.laserBeamer.cost);
     }
 
     private void UpdateUpgradeUI()
@@ -85,13 +89,12 @@ public class NodeUI : MonoBehaviour
 
         if (target.TurretIsUpgradable()) {
             upgradeCostText.text = "$" + target.GetUpgradeCost();
+            upgradeButton.interactable = PlayerStats.CanAfford(target.GetUpgradeCost());
         } else {
             upgradeCostText.text = "MAX";
             upgradeButton.interactable = false;
-
-            return;
         }
 
-        upgradeButton.interactable = PlayerStats.CanAfford(target.GetUpgradeCost());
+        priceOfSaleText.text = "SELL $" + target.GetPriceOfSale();
     }
 }

@@ -9,7 +9,6 @@ public class EventSystemTouch : MonoBehaviour
         // Check mouse
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("return mouse");
             return true;
         }
 

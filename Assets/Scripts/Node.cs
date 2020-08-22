@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Node : MonoBehaviour
 {
@@ -48,12 +49,12 @@ public class Node : MonoBehaviour
             return;
         }
 
-        if (PlayerStats.money < blueprint.cost) {
+        if (!PlayerStats.CanAfford(blueprint.cost)) {
             Debug.Log("Not enough money to build that!");
             return;
         }
 
-        PlayerStats.money -= blueprint.cost;
+        PlayerStats.ReduceMoney(blueprint.cost);
 
         GameObject builtTurret = (GameObject)Instantiate(blueprint.prefab, GetBuildPosition(), Quaternion.identity);
         turret = builtTurret;
@@ -64,15 +65,40 @@ public class Node : MonoBehaviour
         Destroy(effect, 5f);
     }
 
+    public void SellTurret()
+    {
+        if (turret == null) {
+            Debug.Log("There is no turret here to sell");
+            return;
+        }
+
+        int priceOfSale = GetPriceOfSale();
+        Debug.Log("Sold turret for " + priceOfSale.ToString());
+        PlayerStats.AddMoney(priceOfSale);
+        Destroy(turret);
+        turretBlueprint = null;
+        turret = null;
+    }
+
+    public int GetPriceOfSale()
+    {
+        int worth = turretBlueprint.cost;
+        for(int i = 1; i <= turretUpgradeLevel; i++) {
+            worth += turretBlueprint.upgradeConfig.GetCosts(i);
+        }
+
+        return Mathf.RoundToInt(worth * 0.5f);
+    }
+
     public void UpgradeTurret()
     {
         int upgradeCost = GetUpgradeCost();
-        if (PlayerStats.money < upgradeCost) {
+        if (!PlayerStats.CanAfford(upgradeCost)) {
             Debug.Log("Not enough money to upgrade!");
             return;
         }
 
-        PlayerStats.money -= upgradeCost;
+        PlayerStats.ReduceMoney(upgradeCost);
 
         Destroy(turret);
 
