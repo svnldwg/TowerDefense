@@ -27,7 +27,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Menu()
     {
-        Debug.Log("Go to Menu");
+        Unfreeze();
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void Unfreeze()
