@@ -6277,6 +6277,8 @@ MonoBehaviour:
   nodeUI: {fileID: 669895886}
   buildEffect: {fileID: 1074936273123785772, guid: 936b984f245d34d22a5c0e76fdb3f4f4,
     type: 3}
+  sellEffect: {fileID: 809571614032137450, guid: 6679e5bf354104f318a8124ffa65f0d2,
+    type: 3}
 --- !u!114 &487446694
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -75,6 +75,10 @@ public class Node : MonoBehaviour
         int priceOfSale = GetPriceOfSale();
         Debug.Log("Sold turret for " + priceOfSale.ToString());
         PlayerStats.AddMoney(priceOfSale);
+
+        GameObject effect = (GameObject)Instantiate(buildManager.sellEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 5f);
+
         Destroy(turret);
         turretBlueprint = null;
         turret = null;

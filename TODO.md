@@ -4,7 +4,6 @@ Game features:
 - Pause game
 - Spawn next wave instantly
 - display range when clicking on turret
-- sell turrets
 
 Controls:
 - Click outside of node closes shop menu
