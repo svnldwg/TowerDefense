@@ -1,7 +1,6 @@
 Game features:
 - Health Bars
 - Game speed switch
-- Pause game
 - Spawn next wave instantly
 - display range when clicking on turret
 

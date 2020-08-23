@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SellEffect
+  m_Name: SellEffect_Debris
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -90,7 +90,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.7571903, b: 0.1745283, a: 1}
+    - _Color: {r: 0.13608047, g: 0.1844934, b: 0.20754719, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 1, g: 0.55099326, b: 0, a: 1}
+    - _EmissionColor: {r: 0.08388216, g: 0.10326183, b: 0.122641504, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
