@@ -1,5 +1,4 @@
 Game features:
-- Health Bars
 - Game speed switch
 - Spawn next wave instantly
 - display range when clicking on turret
@@ -11,8 +10,7 @@ UI:
 - display lives, money, current wave always on top so it is always visible
 - display turret name in Shop
 - display turret attributes in Shop (radius, damage, speed, etc.)
-- start screen
-- rotate animation of turret in shop instead of static image
+- (rotate animation of turret in shop instead of static image)
 
 Graphics:
 - Cool looking Enemies
