@@ -82,6 +82,7 @@ public class Node : MonoBehaviour
         Destroy(turret);
         turretBlueprint = null;
         turret = null;
+        turretUpgradeLevel = 0;
     }
 
     public int GetPriceOfSale()
