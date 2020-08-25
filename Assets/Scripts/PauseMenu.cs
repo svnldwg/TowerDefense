@@ -5,6 +5,10 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject ui;
 
+    public string menuSceneName = "MainMenu";
+
+    public SceneFader sceneFader;
+
     public void ShowPauseMenu()
     {
         ui.SetActive(true);
@@ -22,13 +26,13 @@ public class PauseMenu : MonoBehaviour
     public void Retry()
     {
         Unfreeze();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
     public void Menu()
     {
         Unfreeze();
-        SceneManager.LoadScene("MainMenu");
+        sceneFader.FadeTo(menuSceneName);
     }
 
     private void Unfreeze()
