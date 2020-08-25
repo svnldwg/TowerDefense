@@ -2,6 +2,7 @@ Game features:
 - Game speed switch
 - Spawn next wave instantly
 - display range when clicking on turret
+- continue game later (save & load)
 
 Controls:
 - Click outside of node closes shop menu

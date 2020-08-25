@@ -22,14 +22,21 @@ public class NodeUI : MonoBehaviour
 
     private Node target;
 
-    private void Update() {
-        UpdateUI();
+    private void OnEnable() 
+    {
+        Node.OnTurretBuilt += UpdateUI;
+    }
+
+    private void OnDisable() 
+    {
+        Node.OnTurretBuilt -= UpdateUI;
     }
 
     public void SetTarget(Node _target)
     {
         target = _target;
         ui.SetActive(true);
+        UpdateUI();
     }
 
     public void Hide()
@@ -42,12 +49,13 @@ public class NodeUI : MonoBehaviour
     public void Upgrade()
     {
         target.UpgradeTurret();
+        UpdateUI();
     }
 
     public void Sell()
     {
-        Debug.Log("Sell");
         target.SellTurret();
+        UpdateUI();
     }
 
     private void UpdateUI() {

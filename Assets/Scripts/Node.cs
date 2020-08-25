@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Node : MonoBehaviour
 {
@@ -14,12 +13,13 @@ public class Node : MonoBehaviour
 
     private int turretUpgradeLevel = 0;
     
-
     private Color startColor;
     private float startGlossiness;
     private Renderer rend;
     private BuildManager buildManager;
 
+    public delegate void BuildTurretAction();
+    public static event BuildTurretAction OnTurretBuilt;
 
     private void Start() {
         rend = GetComponent<Renderer>();
@@ -63,6 +63,8 @@ public class Node : MonoBehaviour
 
         GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
         Destroy(effect, 5f);
+
+        OnTurretBuilt?.Invoke();
     }
 
     public void SellTurret()

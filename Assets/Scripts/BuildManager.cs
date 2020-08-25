@@ -41,7 +41,7 @@ public class BuildManager : MonoBehaviour
         nodeUI.Hide();
     }
 
-    public void SelectTurretToBuild(TurretBlueprint turret)
+    public void BuildTurret(TurretBlueprint turret)
     {
         selectedNode.BuildTurret(turret);
     }
