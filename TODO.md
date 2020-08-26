@@ -23,3 +23,4 @@ New game elements:
 - Turret with Slow Down Radius (ice tower)
 - Portals
 - More Levels
+- New Turret: Flamethrower / skunk
