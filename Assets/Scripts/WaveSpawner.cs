@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class WaveSpawner : MonoBehaviour
 {
     public static int enemiesAlive = 0;
+    public static bool waveIsSpawning = false;
 
     public Wave[] waves;
     public Transform spawnPoint;
@@ -31,9 +32,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     private void Update() {
-        Debug.Log(enemiesAlive);
-        if (enemiesAlive > 0) 
-        {
+        if (waveIsSpawning) {
             return;
         }
 
@@ -50,6 +49,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     private IEnumerator SpawnWave() {
+        waveIsSpawning = true;
         PlayerStats.waves++;
 
         Wave wave = waves[waveIndex];
@@ -61,6 +61,8 @@ public class WaveSpawner : MonoBehaviour
                 yield return new WaitForSeconds(1f / waveSection.rate);
             }
         }
+
+        waveIsSpawning = false;
 
         waveIndex++;
 
