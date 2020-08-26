@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverUI;
 
+    public delegate void EndGameAction();
+    public static event EndGameAction OnGameOver;
+
     private void Start() {
         gameIsOver = false;
     }
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         gameIsOver = true;
+        OnGameOver?.Invoke();
 
         gameOverUI.SetActive(true);
     }

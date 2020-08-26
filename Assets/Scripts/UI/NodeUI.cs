@@ -25,11 +25,13 @@ public class NodeUI : MonoBehaviour
     private void OnEnable() 
     {
         Node.OnTurretBuilt += UpdateUI;
+        GameManager.OnGameOver += Hide;
     }
 
     private void OnDisable() 
     {
         Node.OnTurretBuilt -= UpdateUI;
+        GameManager.OnGameOver -= Hide;
     }
 
     public void SetTarget(Node _target)
